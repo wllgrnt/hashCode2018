@@ -6,6 +6,7 @@ from input import processInputFile
 parser = argparse.ArgumentParser()
 parser.add_argument("inputfile")
 args = parser.parse_args()
-fleet = processInputFile(args.inputfile)
+fleet, rides = processInputFile(args.inputfile)
 
-print(fleet)
+print('Fleet:', fleet)
+print('Rides:', rides)
