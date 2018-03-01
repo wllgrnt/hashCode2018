@@ -1,3 +1,7 @@
+import itertools
+from ride import Ride
+from grid import getDistance
+
 class Car:
 
     def __init__(self):
@@ -26,9 +30,9 @@ class Car:
         self.assigned_rides.append(ride)
 
     def pass_time_until_free(self):
-        while self.laden:
-            sef.pass_time
-        return self.time
+        self.current_ride = self.assigned_rides[-1]
+        dist = getDistance(self.current_position, self.current_ride.origin) + getDistance(self.current_ride.origin, self.current_ride.destination)
+        self.time += dist
 
     def pass_time(self):
         if self.laden:
