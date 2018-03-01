@@ -6,6 +6,7 @@ from grid import getDistance
 
 parser = argparse.ArgumentParser()
 parser.add_argument("inputfile")
+parser.add_argument("outputfile")
 args = parser.parse_args()
 fleet, rides = processInputFile(args.inputfile)
 
@@ -22,4 +23,4 @@ for car in fleet:
     car.assign_ride(ride)
     rides.pop(rides.index(ride))
 
-writeSolution(fleet, "../out/out.txt")
+writeSolution(fleet, args.outputfile)
