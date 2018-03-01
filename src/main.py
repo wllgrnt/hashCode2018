@@ -9,17 +9,19 @@ parser.add_argument("inputfile")
 args = parser.parse_args()
 fleet, rides = processInputFile(args.inputfile)
 
-print('Fleet:', fleet)
 print('Rides:', rides)
 
 for car in fleet:
-    dist = 1000000
-    cloest_ride = None
+    dist = None
+    closest_ride = None
     for ride in rides:
-        if (getDistance(car.current_position, ride.origin) < dist):
-            dist = getDistance(car.current_position, ride.origin)
-            cloest_ride = ride
-    car.assign_ride(ride)
-    rides.pop(rides.index(ride))
+        trial_dist = getDistance(car.current_position, ride.origin)
+        if dist is None or trial_dist < dist:
+            dist = trial_dist
+            closest_ride = ride
+    car.assign_ride(closest_ride)
+    rides.pop(rides.index(closest_ride))
+
+print('Fleet:', fleet)
 
 writeSolution(fleet, "../out/out.txt")
