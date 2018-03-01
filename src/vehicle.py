@@ -25,6 +25,11 @@ class Car:
     def assign_ride(self, ride):
         self.assigned_rides.append(ride)
 
+    def pass_time_until_free(self):
+        while self.laden:
+            sef.pass_time
+        return self.time
+
     def pass_time(self):
         if self.laden:
             self.destination = self.current_ride.destination
@@ -33,7 +38,7 @@ class Car:
 
         # load up or unload as necessary
         if self.destination == self.current_position and self.current_ride.start_time >= self.time:
-            self.laden = True
+            self.laden = not self.laden
 
         # move towards destination
         x_to_travel = self.destination[0] - self.current_position[0]
