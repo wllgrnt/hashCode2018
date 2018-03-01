@@ -4,10 +4,23 @@ class Car:
         self.assigned_rides = []
         self.current_position = [0, 0]
         self.current_ride = None
-        self.destination = None
+        self.destination = [None, None]
         self.cumulative_score = 0
         self.laden = False
         self.time = 0
+
+    def __repr__(self):
+        return (('\nVehicle object:\nAt t={}, vehicle is at ({}, {}) with {} passenger{} '
+                 'heading to ({}, {}).\n'
+                 'Current score: {}.\n'
+                 'Next rides: {}\n')
+                .format(self.time,
+                        self.current_position[0], self.current_position[1],
+                        'a' if self.laden else '0',
+                        '' if self.laden else 's',
+                        self.destination[0], self.destination[1],
+                        self.cumulative_score,
+                        self.assigned_rides))
 
     def assign_ride(self, ride):
         self.assigned_rides.append(ride)
