@@ -29,17 +29,18 @@ while len(rides) > 0:
                 wait_time = max(int(ride.start_time) - (time + trial_dist), 0)
                 projected_finish_time = wait_time + trial_dist + ride.length
                 score = ride.length + bonus
-                if trial_dist <= ride.start_time - time:
+                if trial_dist <= int(ride.start_time) - int(time):
                     score += bonus
-                score_per_time = score / (projected_finish_time - time)
+                # score_per_time = score / (projected_finish_time - time)
                 # if ride finishes sooner than all others
-                if best_score_per_time is None or score_per_time > best_score_per_time:
+                if quickest_finish_time is None or projected_finish_time < quickest_finish_time:
+                # if best_score_per_time is None or score_per_time > best_score_per_time:
                     # if ride finishes in time allowed
                     if projected_finish_time <= int(ride.finish_time):
                         dist = trial_dist
                         best_ride = ride
                         quickest_finish_time = projected_finish_time
-                        best_score_per_time = score_per_time
+                        # best_score_per_time = score_per_time
             if quickest_finish_time is None:
                 time = all_time + 1
             else:
