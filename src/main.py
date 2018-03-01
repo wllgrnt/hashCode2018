@@ -7,6 +7,7 @@ from copy import deepcopy
 
 parser = argparse.ArgumentParser()
 parser.add_argument("inputfile")
+parser.add_argument("outputfile")
 args = parser.parse_args()
 fleet, rides, all_time = processInputFile(args.inputfile)
 total_num_rides = len(rides)
@@ -46,4 +47,4 @@ for ind, car in enumerate(fleet):
 
 print('Fulfilled {}/{} rides'.format(rides_fulfilled, total_num_rides))
 
-writeSolution(fleet, "../out/out.txt")
+writeSolution(fleet, args.outputfile)
