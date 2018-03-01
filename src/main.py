@@ -3,7 +3,7 @@ import argparse
 from input import processInputFile
 from output import writeSolution
 from grid import getDistance
-from copy import deepcopy
+from ascii_graph import Pyasciigraph
 import tqdm
 
 parser = argparse.ArgumentParser()
@@ -26,7 +26,7 @@ for ind, car in tqdm.tqdm(enumerate(fleet), total=len(fleet)):
             trial_dist = getDistance(car.current_position, ride.origin)
             if dist is None or trial_dist < dist:
                 # check if the time taken to reach and perform the ride is feasible
-                wait_time = max(int(ride.start_time) - time, 0)
+                wait_time = max(int(ride.start_time) - (time + trial_dist), 0)
                 if wait_time + trial_dist + ride.length <= int(ride.finish_time) - int(time):
                     # check if the time taken to reach and perform the ride is feasible
                     # if trial_dist + time < ride.start_time:
@@ -47,10 +47,23 @@ for ind, car in tqdm.tqdm(enumerate(fleet), total=len(fleet)):
 ride_bar.close()
 
 rides_fulfilled = 0
+hist_dict = {}
 for ind, car in enumerate(fleet):
     # print('{} {}'.format(ind, car.num_rides))
+    if car.num_rides not in hist_dict:
+        hist_dict[car.num_rides] = 0
+    hist_dict[car.num_rides] += 1
     rides_fulfilled += car.num_rides
 
+sorted_keys = sorted(hist_dict.keys())
+hist = []
+for key in sorted_keys:
+    hist.append((key, hist_dict[key]))
+
 print('\n\nFulfilled {}/{} rides'.format(rides_fulfilled, total_num_rides))
+
+graph = Pyasciigraph()
+for line in graph.graph('cars num_rides', hist):
+    print(line)
 
 writeSolution(fleet, args.outputfile)
