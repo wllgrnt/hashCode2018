@@ -24,7 +24,7 @@ for ind, car in tqdm.tqdm(enumerate(fleet), total=len(fleet)):
             length = ride.length
             bonus = (int(car.time) + dist < int(ride.start_time))
 
-            if (int(car.time) + dist + ride.length > int(ride.finish_time)):
+            if (max(int(car.time) + dist + ride.length, ride.start_time) > int(ride.finish_time)):
                 continue
 
             #if bonus and length > best_score:
