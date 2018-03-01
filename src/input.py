@@ -24,4 +24,4 @@ def processInputFile(inputFileName):
                      finish_time=latest_finish)
         rides.append(ryder)
 
-    return fleet, rides, T
+    return fleet, rides, T, B
