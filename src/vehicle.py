@@ -53,3 +53,7 @@ class Car:
             self.current_position[1] -= 1
 
         self.time += 1
+
+    @property
+    def num_rides(self):
+        return len(self.assigned_rides)
