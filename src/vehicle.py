@@ -1,4 +1,5 @@
 class Car:
+
     def __init__(self):
         self.assigned_rides = []
         self.current_position = [0, 0]
@@ -15,7 +16,7 @@ class Car:
         if self.laden:
             self.destination = self.current_ride.destination
         else:
-            self.destination = self.current_ride.start
+            self.destination = self.current_ride.origin
 
         # load up or unload as necessary
         if self.destination == self.current_position and self.current_ride.start_time >= self.time:
