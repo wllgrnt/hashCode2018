@@ -1,6 +1,7 @@
 # vim cruft
 .*.un~
 *.*~
+.*.swp
 
 
 # Byte-compiled / optimized / DLL files
