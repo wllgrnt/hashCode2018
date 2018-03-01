@@ -1,14 +1,6 @@
 import os
-
-
-class Car():
-    def __init__(self):
-        pass
-
-
-class Ryder():
-    def __init__(self):
-        pass
+from vehicle import Car
+from ride import Ride
 
 
 def processInputFile(inputFileName):
@@ -23,13 +15,13 @@ def processInputFile(inputFileName):
     fleet = [Car() for i in range(F)]
 
     rides = []
-    for line in inputData[1:]:
+    for ind, line in enumerate(inputData[1:]):
         start_row, start_column, finish_row, finish_column, earliest_start, latest_finish = line
-        ryder = Ryder(
-            origin=(start_row, start_column),
-            destination=(finish_row, finish_column),
-            earliest_start=earliest_start,
-            latest_finish=latest_finish)
+        ryder = Ride(ride_id=ind,
+                     origin=(start_row, start_column),
+                     destination=(finish_row, finish_column),
+                     start_time=earliest_start,
+                     finish_time=latest_finish)
         rides.append(ryder)
 
     return fleet, rides
