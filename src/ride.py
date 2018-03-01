@@ -1,3 +1,5 @@
+from grid import getDistance
+
 class Ride:
     def __init__(self, ride_id, origin, destination, start_time, finish_time):
         self.ride_id = ride_id
@@ -5,6 +7,7 @@ class Ride:
         self.destination = destination
         self.start_time = start_time
         self.finish_time = finish_time
+        self.length = getDistance(self.origin, self.destination)
 
     def __repr__(self):
         return f""""(ride_id: {self.ride_id},
